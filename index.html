@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"> 
+        <title>CV for task "Git and HTML and CSS"</title>
+        <style>
+            .new_font {
+                font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+                font-size: 14px;
+                line-height: 1.5;
+                color: #24292e;
+                background-color: #fff;
+            }
+            
+            .highlight {             
+                padding: 16px;
+                overflow: auto;
+                font-size: 85%;
+                line-height: 1.45;
+                background-color: #f6f8fa;
+                border-radius: 3px;
+            }
+            
+            h2 {
+                padding-bottom: 0.3em;
+                font-size: 1.5em;
+                border-bottom: 1px solid #eaecef;
+            }
+            
+            h1 {
+                padding-bottom: 0.3em;
+                font-size: 2em;
+                border-bottom: 1px solid #eaecef;
+            }
+            
+            
+            
+        </style>
+    </head>
+    <body class="new_font">
+
+        <h1><a href="https://kirillzhel.github.io/rsschool-cv/" style="color: #0366d6;
+    text-decoration: none;">rsschool-cv</a></h1>
+        
+        <h1>KIRILL ZHELTYSHEV</h1>
+    
+        <p><i>Saint-Petersburg, Russia</i></p>
+    
+        <h2>Contact</h2>
+    
+        <ul>
+            <li>Mobile: 8(911)-718-47-60</li>
+            <li>EMail: <a href="zheltyshev.kirill@gmail.com">zheltyshev.kirill@gmail.com</a></li>
+            <li>Telegram: <a href="https://t.me/kiryazh">kiryazh</a></li>
+            <li>GitHub: <a href="https://github.com/KirillZhel">KirillZhel</a></li>
+        </ul>
+    
+    <h2>Summary</h2>
+    <p>My goal is to get a new modern profession of a programmer and further professional growth. I am stress-resistant, assiduous, ready to learn new things and am not afraid of sudden changes.</p>
+    
+    <h2>Skills</h2>
+    <ul>
+        <li>Basic knowledge of C++, C#, JS, HTML5, CSS3, GIT.</li>
+        <li>Basic knowledge of IDE Visual Studio.</li>
+    </ul>
+    
+    <h2>Code Example</h2>
+    <pre class="highlight"><code>
+    #include &lt;iostream&gt;
+    #include &lt;fstream&gt;
+    #include &lt;cmath&gt;
+    #include &quot;functions.h&quot;
+
+    double integrand(double t)
+    {
+        double rez = sin (t * t);
+        return rez;
+        }
+
+    double lagrange1(double* x, double* y, int n, double _x)
+    {
+        double result = 0.0;
+
+        for (int i = 0; i &lt; n; i++)
+        {
+            double P = 1.0;
+
+            for (int j = 0; j &lt; n; j++)
+                if (j != i)
+                    P *= (_x - x[j]) / (x[i] - x[j]);
+
+            result += P * y[i];
+        }
+
+        return result;
+    }
+
+    int main()
+    {
+        int i;
+        double x[7];
+
+        for (i = 0; i &lt; 7; i++)
+        {
+            x[i] = 1.5 + 0.2 * i;
+        }
+
+        double abserr = 0.001;
+        double relerr = 0.001;
+        double result = 0.0, errest = 0.0;
+        int nofun = 0, flag = 0;
+        double posn = 0.0;
+
+        double function[7];
+
+        std::cout &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot; Number&quot; &lt;&lt; &quot;\t&quot; &lt;&lt; &quot;x[i]&quot; &lt;&lt; &quot;\t&quot; &lt;&lt; &quot;function[i]&quot; &lt;&lt; std::endl;
+        std::cout &lt;&lt; std::endl;
+
+        for (i = 0; i &lt; 7; i++)
+        {
+            quanc8(integrand, 0, x[i],
+                   abserr, relerr,
+                   &amp;result, &amp;errest,
+                   &amp;nofun,
+                   &amp;posn, &amp;flag);
+
+            function[i] = result;
+            std::cout &lt;&lt; &quot; &quot; &lt;&lt; i &lt;&lt; &quot;\t&quot; &lt;&lt; x[i] &lt;&lt; &quot;\t&quot; &lt;&lt; function[i] &lt;&lt; std::endl;
+        }
+
+        std::cout &lt;&lt; std::endl;
+
+        /*----------1 часть (Лагранж)----------*/
+
+        std::cout &lt;&lt; &quot;----------1 chast'----------&quot; &lt;&lt; std::endl;
+        std::cout &lt;&lt; std::endl;
+
+        std::cout &lt;&lt; &quot; Number&quot; &lt;&lt; &quot;\t&quot; &lt;&lt; &quot;x[i]&quot; &lt;&lt; &quot;\t&quot; &lt;&lt; &quot;function[i]&quot; &lt;&lt; std::endl;
+        std::cout &lt;&lt; std::endl;
+
+        const int n = 6;
+
+        int k = 0;
+        double x_k[n];
+        double arr_lagrange[6];
+
+        for (k = 0; k &lt; 6; k++)
+        {
+            x_k[k] = 1.6 + 0.2 * k;
+            arr_lagrange[k] = lagrange1(x, function, 7, x_k[k]);
+
+            std::cout &lt;&lt; &quot; &quot; &lt;&lt; k &lt;&lt; &quot;\t&quot; &lt;&lt; x_k[k] &lt;&lt; &quot;\t&quot; &lt;&lt; lagrange1(x, function, 7, x_k[k]) &lt;&lt; std::endl;
+        }
+
+        /*----------2 часть (Сплайн)----------*/
+
+        std::cout &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;----------2 chast'----------&quot; &lt;&lt; std::endl;
+        std::cout &lt;&lt; std::endl;
+
+        int end1 = 0, end2 = 0;
+        double slope1 = 0, slope2 = 0;
+        double b[n], c[n], d[n];
+        int iflag;
+
+        spline(n, end1, end2, slope1, slope2,
+               x, function, b, c, d, &amp;iflag);
+
+        int nk = 6;
+        double u;
+        int last = -1;
+
+        double arr_spline[6];
+
+        for (k = 0; k &lt; 6; k++)
+        {
+            arr_spline[k] = seval(nk, x_k[k], x, function, b, c, d, &amp;last);
+
+            std::cout &lt;&lt; &quot; &quot; &lt;&lt; k &lt;&lt; &quot;\t&quot; &lt;&lt; x_k[k] &lt;&lt; &quot;\t&quot; &lt;&lt;
+            seval(nk, x_k[k], x, function, b, c, d, &amp;last) &lt;&lt; std::endl;
+        }
+
+        /*----------3 часть (QUANC8 для x_k)----------*/
+
+        std::cout &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot;----------3 chast'----------&quot; &lt;&lt; std::endl;
+        std::cout &lt;&lt; std::endl;
+
+        double function_k[6];
+        double arr_quanc8[6];
+
+        for (k = 0; k &lt; 6; k++)
+        {
+            quanc8(integrand, 0, x_k[k],
+                abserr, relerr,
+                &amp;result, &amp;errest,
+                &amp;nofun,
+                &amp;posn, &amp;flag);
+
+            function_k[k] = result;
+            arr_quanc8[k] = function_k[k];
+
+            std::cout &lt;&lt; &quot; &quot; &lt;&lt; k &lt;&lt; &quot;\t&quot; &lt;&lt; x_k[k] &lt;&lt; &quot;\t&quot; &lt;&lt; function_k[k] &lt;&lt; std::endl;
+        }
+
+        std::cout &lt;&lt; std::endl;
+        std::cout &lt;&lt; &quot; &quot; &lt;&lt; &quot;N&quot; &lt;&lt; &quot;\t&quot; &lt;&lt; &quot;x[k]&quot; &lt;&lt; &quot;\t&quot; &lt;&lt; &quot;Lagrange&quot; &lt;&lt; &quot;\t&quot; &lt;&lt; &quot;Spline&quot; &lt;&lt; &quot;\t&quot; &lt;&lt; &quot;QUANC8&quot; &lt;&lt; std::endl;
+        std::cout &lt;&lt; std::endl;
+
+        for (k = 0; k &lt; 6; k++)
+        {
+            std::cout &lt;&lt; &quot; &quot; &lt;&lt; k &lt;&lt; &quot;\t&quot; &lt;&lt; x_k[k] &lt;&lt; &quot;\t&quot; &lt;&lt; arr_lagrange[k] &lt;&lt; &quot;\t&quot; &lt;&lt; arr_spline[k] &lt;&lt; &quot;\t&quot; &lt;&lt; arr_quanc8[k] &lt;&lt;  std::endl;
+        }
+    }
+    </code></pre>
+    
+    <h2>Education</h2>
+    
+    <ul>
+        <li>Master’s degree in “design and technological support of machine-building industries” in the direction of “metalworking machines and complexes”.</li>
+        <li>half-education in “computer engineering”.</li>
+    </ul>
+    
+    <h2>English</h2>
+    <ul><li>Pre-Intermediate</li></ul>
+    
+    </body>
+</html>
